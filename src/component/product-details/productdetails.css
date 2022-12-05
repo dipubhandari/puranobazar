@@ -4,7 +4,7 @@
     margin: 4px 0px;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
+
     background-color: rgb(238, 237, 232);
     padding-top: 40px;
 }
@@ -21,45 +21,54 @@
     width: 500px;
     height: 500px;
 }
-.images{
+
+.images {
     color: white;
 }
+
 .small_img {
     background-color: black;
     opacity: 50%;
     display: flex;
-    width: 500px;
+    width: 90%;
+    
+    margin: auto;
+
 }
 
 .productdes {
     background-color: #fff;
     margin: 10px 1px;
     display: flex;
+    width: 100%;
     margin: auto;
 }
 
 .productdes p {
-    width: 90%;
     padding: 20px;
     margin: auto;
-    min-height: 400px;
+    width: 309px;
+    min-height: 500px;
 }
 
 .imgdiv {
     background-color: black;
     height: 100px;
     width: 100px;
-    opacity: 50%;
+    opacity: 14%;
 }
-.images .arrow{
-   
-    position: relative;
+
+.images .arrow {
+
+    position: static;
     bottom: 240px;
     margin: 22px;
 }
-.imgdiv:hover{
+
+.imgdiv:hover {
     opacity: 100%;
 }
+
 .imgdiv img {
     width: 100px;
     height: 100px;
@@ -82,13 +91,6 @@
     left: -6px;
 }
 
-.nextii {
-    background-color: #414141;
-    position: relative;
-    bottom: 250px;
-    margin-left: 11px;
-}
-
 .right___section {
     width: 23%;
     height: 100%;
@@ -107,7 +109,10 @@
     color: cadetblue;
     background-color: #ffff;
 }
-
+.detailfooter{
+    display: flex;
+    gap: 100px;
+}
 .price {
     left: 0;
     /* position: relative; */
@@ -137,11 +142,12 @@
 }
 
 .location {
+    background-color: none;
 
-    display: flex;
-    color: lightslategrey;
-    width: 50%;
+}
 
+#now {
+    opacity: 100;
 }
 
 .seller-detail {
@@ -153,7 +159,8 @@
     height: 25%;
     border: 1px solid rgb(233, 215, 215);
     border-radius: 7px;
-    padding: 5px;
+    padding: 9px;
+    gap: 10px;
     background-color: #ffff;
 }
 
@@ -195,10 +202,116 @@
 
 .map {
     margin: 0px;
-    height: 35%;
+    height: 54%;
 
     border: 1px solid rgb(233, 215, 215);
     border-radius: 7px;
-    padding: 5px;
-    background-color: #ffff;
+    /* padding: 5px; */
+    box-shadow: 1px 1px 1px 1px;
+}
+
+@media only screen and (max-width: 480px) {
+    .product_details_main {
+        display: grid;
+        background-color: rgb(238, 237, 232);
+        width: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left___section {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .imgdiv {
+        background-color: orange;
+    }
+
+    .images img {
+        width: 350px;
+        margin: auto;
+        height: 398px;
+        display: flex;
+    }
+
+    .arrow {
+        position: absolute;
+        top: 10px;
+    }
+
+    .small_img {
+        display: none;
+    }
+
+    .right___section {
+        display: flex;
+        gap: 50px;
+        flex-direction: column;
+        width: 400px;
+        padding: 10px;
+    }
+
+    .details {
+        margin-top: 50px;
+        display: flex;
+        width: 90%;
+        margin-right: auto;
+            margin-left: auto;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .seller-detail {
+        margin-top: 50px;
+            display: flex;
+            width: 90%;
+            margin-right: auto;
+            margin-left: auto;
+            flex-direction: column;
+            height: auto;
+    }
+
+    .map {
+        width: 400px;
+
+    }
+    .map img{
+        width: 400px;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+    .product_details_main {
+        display: grid;
+        background-color: rgb(238, 237, 232);
+        width: auto;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* 
+    .left___section {
+        width: 400px;
+        margin: auto;
+        height: 800px;
+        display: grid;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .images {
+        width: 100px;
+        height: 500px;
+        margin: 0px;
+    }
+
+    .images img {
+        width: 400px;
+        height: 500px;
+
+    } */
 }

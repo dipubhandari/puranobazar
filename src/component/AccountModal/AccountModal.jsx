@@ -1,45 +1,134 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
+import axios from 'axios'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonPinIcon from '@mui/icons-material/PersonPin';
 import './loginsignupstyle.css'
+import CloseIcon from '@mui/icons-material/Close';
 
 const AccountModal = (props) => {
+
+    // signup
+    // signup
+
+
+    const [msg, setMsg] = useState('')
+    const [input, setInput] = useState({})
+
+    // handlechange for signup
+
+
+    function handleChange(signup_element) {
+        const name = signup_element.target.name
+        const value = signup_element.target.value
+        console.log(input)
+
+        setInput({ ...input, [name]: value })
+    }
+
+
+    // handlesubmit for signup
+
+    async function handleSubmit(e) {
+
+        e.preventDefault()
+
+        await axios.post('/createaccount', input)
+            .then((response) => {
+                setMsg(response.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    // signup
+    // signup
+    // lgin
+    // lgin
+
+
+    const [loginmsg, setloginmsg] = useState('')
+    const [login, setlogin] = useState({})
+
+    // handlechange for signup
+
+
+    function handleloginchange(login_element) {
+        const name = login_element.target.name
+        const value = login_element.target.value
+        console.log(login)
+
+        setlogin({ ...login, [name]: value })
+    }
+
+
+    // handlesubmit for signup
+
+    async function loginSend(e) {
+
+        e.preventDefault()
+
+        await axios.post('/login', login)
+            .then((response) => {
+                // setloginmsg(response.data)
+                console.log(response.data)
+
+                const setLocalStorage = localStorage.setItem('user', JSON.stringify(response.data))
+                console.log(localStorage.getItem('user'))
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    //    login
+
+
     // login or signup modal show
 
     const [isLogin, setIslogin] = useState(props.hide)
-     
+
     // login or signup show 
 
-    const [isCreateAccount, setisCreateAccounted] = useState(true)
-    console.log(props.hide)
-    console.log(props.show(isLogin))
+    const [isCreateAccount, setisCreateAccounted] = useState(false)
+
+    props.show(isLogin)
 
 
 
     if (isLogin) {
-        console.log(props)
+
         return (<div className='modal'>
 
             <div className="close" onClick={() => {
                 setIslogin(false)
             }}>
-                close
+                <CloseIcon />
             </div>
             {
                 (!(isCreateAccount)) ?
                     <div className="formarea">
-                        <h4>Login Purano Bazar</h4>
-                        <form action="" className='form'>
+                        <h4 className='login-circle'><PersonPinIcon /> <span>Login</span></h4>
+                        <span>{loginmsg}</span>
+                        <form action="" className='form' onSubmit={loginSend}>
                             <input
                                 type="text"
                                 className="value"
+                                onChange={handleloginchange}
+                                value={login.email || ''}
+                                name='email'
                                 placeholder='Enter email'
                             />
                             <input
+                                onChange={handleloginchange}
                                 placeholder='Enter password'
                                 type="text"
+                                name='password'
                                 className="value"
+                                value={login.password || ''}
                             />
-                            <h4 className=''>Login</h4>
+                            <input type='submit' value='login' name='login-sign' className='login-sign' /> <span>Or</span>
                             <button className='login-sign' onClick={
                                 () => {
                                     // sesisCreateAccounted
@@ -53,24 +142,36 @@ const AccountModal = (props) => {
 
                     <div className="formarea">
                         <h4>Create New Account</h4>
+                        <span className='notification'>{msg}</span>
+                        {/* <span className='msg' id='login-msg'>{msg}</span> */}
                         <form action="" className='form'>
                             <input
                                 type="text"
                                 className="value"
+                                onChange={handleChange}
+                                name='name'
                                 placeholder='Enter fullname'
+                                value={input.name || ''}
                             />
                             <input
                                 type="text"
                                 className="value"
+                                onChange={handleChange}
                                 placeholder='Enter email'
+                                name='email'
+                                value={input.email || ''}
+
                             />
                             <input
                                 placeholder='Enter password'
+                                onChange={handleChange}
+                                value={input.password || ''}
+                                name='password'
                                 type="text"
                                 className="value"
                             />
-                            <h4 className=''>Send</h4>
-                            <span className='login-sign' onClick={() => { setisCreateAccounted(false) }}>Login</span>
+                            <input type='submit' className='' name='auth' value='Send' onClick={handleSubmit} />
+                            <span className='create login-sign' onClick={() => { setisCreateAccounted(false) }}>Login</span>
                         </form>
                     </div>}
 

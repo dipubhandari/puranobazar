@@ -6,22 +6,23 @@
     gap: 20px;
 }
 
-.date {
-    width: 100%;
-    justify-content: flex-end;
-    display: flex;
-    right: 0;
-    bottom: 0;
-}
+
 
 .data {
     height: 220px;
     justify-content: center;
-    border: 1px solid rgb(204, 207, 210);
     display: flex;
-    padding: 10px;
+    padding: 1px 1px;
+    flex: 1;
+    height: auto;
+    /* overflow: hidden; */
     flex-direction: column;
     background-color: #ffff;
+}
+
+.link {
+    min-height: 350px;
+    border: 1px solid rgb(197, 219, 219);
 }
 
 .productfooter {
@@ -32,12 +33,14 @@
     height: 10px;
 }
 
-.location {
+.date {
     width: 100%;
     justify-content: flex-start;
     display: flex;
     flex: 1;
     left: 0;
+
+    position: static;
 }
 
 .data-name {
@@ -45,16 +48,13 @@
     display: flex;
     width: 100%;
     left: 0;
-    /* position: relative; */
     color: rgb(83, 83, 83);
-    /* background-color: #ffff; */
 }
 
 .price {
     justify-content: flex-start;
     display: flex;
     background-color: #ffff;
-    position: relative;
     font-weight: bold;
 }
 
@@ -65,12 +65,69 @@
 
 .image {
     width: 100%;
-    height: 100px;
-    flex: 5;
+    height: 200px;
+    flex: 4;
+
+    background-color: rgb(171, 96, 96);
 }
 
 .addBtn {
 
     background-color: lightslategray;
     color: #ffff;
+}
+
+@media only screen and (max-width: 912px) {
+    .container {
+        display: grid;
+        width: 912px;
+        grid-template-columns: 300px 300px;
+        gap: 20px;
+        padding: 0px;
+
+    }
+}
+@media only screen and (max-width: 780px) {
+    .container {
+        display: grid;
+        grid-template-columns: 300px 300px;
+        align-items: center;
+        width: 100%;
+
+    }
+
+    .data {
+        height: 220px;
+        width: auto;
+        justify-content: center;
+        display: flex;
+
+        height: auto;
+        /* overflow: hidden; */
+        /* flex-direction: column; */
+        background-color: #ffff;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+    .container {
+        display: grid;
+        grid-template-columns: 300px;
+        align-items: center;
+        width: 100%;
+
+    }
+   .data {
+       height: 220px;
+       width: 300px;
+       justify-content: center;
+       display: flex;
+    
+       height: auto;
+       /* overflow: hidden; */
+       /* flex-direction: column; */
+       background-color: #ffff;
+   }
+   
 }

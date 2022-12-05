@@ -1,0 +1,38 @@
+.post {
+    background-color: rgb(222, 222, 222);
+    height: 400px;
+    width: 450px;
+    flex-direction: column;
+    margin: 1px auto;
+    display: flex;
+    gap: 10px;
+}
+
+select {
+    background-color: rgb(222, 222, 222);
+    margin: 5px 5px;
+    border: 1px solid aliceblue;
+    color: rgb(41, 33, 33);
+
+}
+
+select:focus {
+    background-color: orange;
+    color: black;
+}
+
+.fileicon{
+    display: hidden;
+    
+    background-color:#eee;
+    color: orange;
+}
+.sell-btn{
+    width: 450px;
+    padding: 20px;
+    margin: 10px 0px;
+    background-color: rgb(209, 194, 194);
+    border: none;
+    color: lightgoldenrodyellow;
+
+}

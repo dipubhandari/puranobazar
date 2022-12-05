@@ -1,31 +1,46 @@
 import GradeIcon from '@mui/icons-material/Grade';
-import React, { useState } from 'react'
-import ProductDetails from './Productdata';
+import React, { useEffect, useState } from 'react'
+// import ProductDetails from './Productdata';
 import './Product.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 const Product = (props) => {
 
-    // all the product fetch from api
-    // const [ProductDetails,setProductDetails] = useState([])
+    // finding the add data from database
+
+    const [ProductDetails, setProductDetails] = useState([{}])
+      useEffect(()=>{
+       async function fetch(){
+           await axios.get('/products')
+           .then((response)=>{
+            console.log(response)
+            //    var base64Flag = 'data:image/jpeg;base64,';
+            //    var imageStr = setProductDetails(response.imag.data.data)
+            setProductDetails(response.data)
+           })
+           
+       }
+fetch()
+      },[]) 
 
     return (
         <div className='container'>
             {/*  */}
             {ProductDetails.map((product, index) => {
-                return <Link to={`/product-detail/${product.id}`} className='link'>
+                return <Link to={`/product-detail/${product._id}`} className='link'>
 
-                    <div className='data link'>
+                    <div className='data '>
                        
                         <span className="datapic">
-                            <img src={product.img} alt="" className="image" />
+                            <img src={`/uploads/${product.images}`} alt="" className="image" />
                         </span>
-                        <div>
-                            <span className='price'>Rs.{product.mrp}</span>
+                        <div className='footer-data'>
+                            <span className='price'>Rs.{product.price}</span>
 
                             <span className='data-name'>{product.name}</span>
                             <section className="productfooter">
-                                <p className='location'>Noida</p>
-                                <p className='date'>23 jan 2022</p>
+                                <p className='location'>{product.district}</p>
+                                <p className='date'>{product.date}</p>
                             </section>
                         </div>
                          

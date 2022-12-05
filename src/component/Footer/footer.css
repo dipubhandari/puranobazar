@@ -1,0 +1,19 @@
+.footer {
+    align-items: center;
+    display: flex;
+
+    background-color: lightgrey;
+    height: 100px;
+    width: 99%;
+    margin: auto;
+    color: rgb(52, 33, 70);
+}
+
+.lo {
+    color: rgb(52, 33, 70);
+    background-color: none;
+    position: relative;
+    bottom: 0px;
+    border: none;
+    right: -100px;
+}

@@ -5,25 +5,72 @@ import './productdetails.css'
 import Footer from '../Footer/Footer'
 import { useState } from 'react'
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 const Productdetails = () => {
     // images for the data or items in array
 
-    const image0 = 'https://images.hindustantimes.com/tech/img/2022/04/07/960x540/IMG_3281_1648269515816_1649300859649.jpg'
-    const image1 = 'http://www.imgmobile.com/upfile/2020072819473848.jpg'
+    const [currentproductdetails, setdetails] = useState({})
+
+
+    const [image1, setImage1] = useState(currentproductdetails.images || 'https://image.coolblue.nl/content/297fa85c9c6041b65709b0999833dfbb')
+    const image0 = 'http://www.imgmobile.com/upfile/2020072819473848.jpg'
     const image2 = 'https://image.coolblue.nl/content/297fa85c9c6041b65709b0999833dfbb'
 
     const image3 = 'http://www.imgmobile.com/upfile/2020072819473848.jpg'
     const image4 = 'https://image.coolblue.nl/content/297fa85c9c6041b65709b0999833dfbb'
-    const [currentproductImage] = React.useState([image1, image0, image2, image3, image4])
+    // const image0 = productdetails.image[0]
+
+    const [currentproductImage] = React.useState([image1, image0, image2, image3, image4, image0, image2, image3, image4])
 
     const [index, setIndex] = useState(0)
+    const [curreShow] = useState()
+    const location = useLocation()
 
-    console.log(index)
+
+    const [email, setEMAILS] = useState('')
+    //fetching the data based on url in the id
+
+    useEffect(() => {
+        async function getData() {
+            const path = location.pathname.split('/')
+            const id = path[path.length - 1]
+
+            await axios.get(`/get-product-details/${id}`)
+                .then((response) => {
+                    console.log(response.data)
+                    setdetails(response.data[0])
+                    setEMAILS(response.data[0].email)
+
+                }).catch((er) => { })
+
+        }
+        getData()
+    }, [])
+
+    // getting the detail of the seller
+    // console.log(currentproductdetails.email)
+
+    const [seller, setSellerDetails] = useState({ name: "name", email: 'email' })
+
+    useEffect(() => {
+
+        const getSellerInfo = async (email) => {
+
+            await axios.get(`/getuser/${email}`).then((response) => {
+                (setSellerDetails(response.data[0]))
+            })
+        }
+        getSellerInfo(email)
+
+    }, [email])
+
 
     return (
         <div className='product_detail_container'>
 
-            <Header />
+            {/* <Header /> */}
 
             <section className="product_details_main">
 
@@ -38,10 +85,10 @@ const Productdetails = () => {
                                 }
                             }}
                             className='arrow' />
-                       
+
                         <img
                             src={currentproductImage[index]}
-                           
+
                             alt="loadi"
                         />
 
@@ -59,25 +106,21 @@ const Productdetails = () => {
 
                     </section>
                     <section className="small_img">
-                        <span className='imgdiv'><img src={currentproductImage[0]} alt="loadi" /></span> <span className='imgdiv'><img src={currentproductImage[1]} alt="loadi" /></span>
-                        <span className='imgdiv'><img src="https://856259.smushcdn.com/1853233/wp-content/uploads/2020/06/eCommerce-product-photography-hero-4-1.jpg?lossy=0&strip=0&webp=1" alt="loadi" /></span>
-                        <span className='imgdiv'><img src="" alt="loadi" /></
-                        span>
-                        <span className='imgdiv'><img src="https://www.91-img.com/pictures/151966-v6-xiaomi-redmi-11-prime-5g-mobile-phone-medium-1.jpg?tr=q-80" alt="loadi" /></span>
+                        {/* <span className='imgdiv'> */}
+                        {
+                            currentproductImage.map((ele, z) => {
+                                return <span className='imgdiv' id={(index == z) ? 'now' : null}>
+                                    <img src={ele} alt="" />
+                                </span>
+                            })
+                        }
                     </section>
 
                     <section className="productdes">
                         <p>
                             {/* <ArrowBackIcon />
                             <ArrowForwardIosIcon /> */}
-                            The Description of the pro is here
-                            The Description of the pro is here
-                            The Description of the pro is here
-                            The Description of the pro is here
-                            The Description of the pro is here
-                            The Description of the pro is here
-                            The Description of the pro is here
-                            The Description of the pro is here
+                            {currentproductdetails.description}
                         </p>
                     </section>
                 </section>
@@ -85,9 +128,9 @@ const Productdetails = () => {
 
                 <section className="right___section">
                     <section className="details">
-                        <h4 className='price'>Rs. 00</h4>
-                        <p className='data-detail'>Copy ben </p>
-                        <span className='detail--footer'><p className='location'>Ilam</p><p className='date'>62 oct</p></span>
+                        <h4 className='price'>Rs.{currentproductdetails.price}</h4>
+                        <p className='data-detail'>{currentproductdetails.name} </p>
+                        <span className='detailfooter'><p className='location'>{currentproductdetails.district}</p><p className='date'>{currentproductdetails.date}</p></span>
                     </section>
 
 
@@ -101,19 +144,19 @@ const Productdetails = () => {
                             <div className="img"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv7tUEDHCN9kceiRx8WDfc9r0oLpxgSzTaiQLNyO6BNMVEAFNFvq-3UO6IXRYGPytb490&usqp=CAU" width='40px'
                                 height='50px' alt="" /></div>
                             <div className="sellernameandtime">
-                                <span className="name">Bipana</span>
-                                <span className="join in">member since 29 jan 2022</span>
+                                <span className="name">{seller.name}</span>
+                                <span className="join in">Contact: {seller.email}</span>
                             </div>
                         </span>
 
                         <button className='chatbutton'>Chat with seller</button>
 
                     </section>
+                    <span className="name">Location of product</span>
 
 
                     <section className="map">
-
-
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSQk_eT0NLGzDbClrdTQZsNGpdjUdcfT4kLY5Q4F6NeMsYOXXYQvDK-uvEoEmBz55Zz80&usqp=CAU" alt="" />
                     </section>
 
 

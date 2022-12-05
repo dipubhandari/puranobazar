@@ -1,32 +1,24 @@
 .header {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     display: flex;
     /* justify-content: center; */
     /* align-items: center;    */
-    position: relative;
+    position: sticky;
+    top: -10px;
     width: 100%;
-    background-color: rgb(209, 204, 204);
+    background-color: orange;
     height: 60px;
     font-family: serif;
+    display: flex;
+    margin: auto;
 }
 
 .logo {
     flex: 1;
-    margin: 5px;
-    font-weight: bold;
-    font-family: serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    height: 39px;
-    width: 99px;
-    color: #414141;
-    font-weight: bold;
+    margin: auto;
 }
-.img{
-width: 100px;
-height: 50px;
-}
+
 
 
 
@@ -34,7 +26,7 @@ height: 50px;
     display: flex;
     flex: 2;
     margin: 9px 0px;
-    width: 50%;
+
 }
 
 .searchfield button {
@@ -67,30 +59,38 @@ height: 50px;
     color: #414141;
     flex-direction: row;
 }
-#user{
+
+#user {
     display: flex;
 
 
     gap: 10px;
 }
+
 .login {
     flex: 1;
-
-    color: orange;
-    border: 1px solid #9e9e9c;
-    background-color: rgb(221, 215, 226);
-    width: 110px;
-    height: 40px;
-    margin: 50px;
+    color: rgb(38, 38, 39);
+    margin: 10px;
+    cursor: pointer;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: none;
 }
 
 .order {
     flex: 1;
     /* background-color: rgb(161, 138, 176); */
-    
+
     display: flex;
     flex-direction: row;
     color: rgb(161, 138, 176);
     justify-content: center;
     align-items: center;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .header{
+       width: 100%;
+       padding-right: 10px;
+    }
 }

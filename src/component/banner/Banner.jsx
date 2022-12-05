@@ -1,4 +1,5 @@
 import React from 'react'
+import './b.css'
 
 const Banner = () => {
 
@@ -6,11 +7,10 @@ const Banner = () => {
         <div className='bannercontainer'>
 
 
-            <img 
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv6-lE1PnspYDefeaocJFzFLdMfP43BBzbsg&usqp=CAU" 
-            alt=""
-             width='1000px'
-             height='89px' />
+            <img
+                src="https://fdn.gsmarena.com/imgroot/news/19/06/energizer-e12-official/-1220x526/gsmarena_000.jpg" className='ban'
+                alt=""
+                 />
 
         </div>
     )
