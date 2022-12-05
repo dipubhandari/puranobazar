@@ -8,26 +8,22 @@ import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Googlemyap from '../Googelmap/map';
 const Productdetails = () => {
     // images for the data or items in array
 
     const [currentproductdetails, setdetails] = useState({})
 
 
-    const [image1, setImage1] = useState(currentproductdetails.images || 'https://image.coolblue.nl/content/297fa85c9c6041b65709b0999833dfbb')
-    const image0 = 'http://www.imgmobile.com/upfile/2020072819473848.jpg'
-    const image2 = 'https://image.coolblue.nl/content/297fa85c9c6041b65709b0999833dfbb'
 
-    const image3 = 'http://www.imgmobile.com/upfile/2020072819473848.jpg'
-    const image4 = 'https://image.coolblue.nl/content/297fa85c9c6041b65709b0999833dfbb'
+    let [image, setimage1] = useState();
     // const image0 = productdetails.image[0]
-
-    const [currentproductImage] = React.useState([image1, image0, image2, image3, image4, image0, image2, image3, image4])
+    // small images
+    const [currentproductImage, setcurrentimage] = React.useState([image, image])
 
     const [index, setIndex] = useState(0)
     const [curreShow] = useState()
     const location = useLocation()
-
 
     const [email, setEMAILS] = useState('')
     //fetching the data based on url in the id
@@ -42,7 +38,9 @@ const Productdetails = () => {
                     console.log(response.data)
                     setdetails(response.data[0])
                     setEMAILS(response.data[0].email)
-
+                    const f = response.data[0].images
+                    setimage1(f)
+                    console.log(f)
                 }).catch((er) => { })
 
         }
@@ -67,6 +65,7 @@ const Productdetails = () => {
     }, [email])
 
 
+
     return (
         <div className='product_detail_container'>
 
@@ -87,7 +86,7 @@ const Productdetails = () => {
                             className='arrow' />
 
                         <img
-                            src={currentproductImage[index]}
+                            src={`/uploads/${image}`}
 
                             alt="loadi"
                         />
@@ -110,7 +109,7 @@ const Productdetails = () => {
                         {
                             currentproductImage.map((ele, z) => {
                                 return <span className='imgdiv' id={(index == z) ? 'now' : null}>
-                                    <img src={ele} alt="" />
+                                    <img src={`/uploads/${image}`} alt="" />
                                 </span>
                             })
                         }
@@ -156,7 +155,10 @@ const Productdetails = () => {
 
 
                     <section className="map">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSQk_eT0NLGzDbClrdTQZsNGpdjUdcfT4kLY5Q4F6NeMsYOXXYQvDK-uvEoEmBz55Zz80&usqp=CAU" alt="" />
+
+
+                        {/* google map */}
+                        <Googlemyap />
                     </section>
 
 

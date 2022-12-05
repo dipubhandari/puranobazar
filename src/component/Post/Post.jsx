@@ -1,4 +1,6 @@
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload'; import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import React from 'react'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import './post.css'
 import Footer from '../Footer/Footer'
 import district, { ward } from './data'
@@ -68,8 +70,8 @@ const Post = () => {
                 {/* <input type="text" name='name' /> */}
 
                 <section className="post">
-                    <div className='header'>
-
+                    <div className=''>
+                        <h1 className='heading'> <DriveFolderUploadIcon /> SELL PRODUCT AND EARN <CurrencyRupeeIcon /></h1>
 
                         <select name="categories" id=""
                             onChange={handleChange}>
@@ -107,18 +109,18 @@ const Post = () => {
 
 
                     </div>
-                    <div>
+                    <div className='post-main'>
                         <input type="text" placeholder='Enter the name'
-                            value={input.name || ''}
+                            value={input.name || ''} className='postinput'
                             name='name' onChange={handleChange} />
 
                         <input type="number" placeholder='Enter Price'
-                            value={input.price || ''}
+                            value={input.price || ''} className='postinput'
                             name='price' onChange={handleChange}
                         />
-
-                        <input type="file" name="file" multiple onChange={file1}
-                            className='file' id="" />
+                        <label htmlFor="file"><CloudUploadIcon /> <b className='upload-topic'>upload file</b></label>
+                        <input type="file" id='file' name="file" multiple onChange={file1}
+                            className='file' />
 
                         <textarea name="description" onChange={handleChange} id="" placeholder='Enter about the product / full features / and so on'
                             value={input.description || ''} cols='44' rows="10" pl></textarea>

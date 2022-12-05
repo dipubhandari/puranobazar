@@ -1,28 +1,50 @@
 .post {
     background-color: rgb(222, 222, 222);
-    height: 400px;
+    height: auto;
     width: 450px;
     flex-direction: column;
     margin: 1px auto;
+    /* justify-content: center; */
     display: flex;
     gap: 10px;
 }
-
+.heading{
+    color: black;
+    opacity: 40%;
+    font-weight: bold;
+}
 select {
     background-color: rgb(222, 222, 222);
     margin: 5px 5px;
     border: 1px solid aliceblue;
     color: rgb(41, 33, 33);
+    opacity: 50%;
+    padding: 20px;
 
 }
-
-select:focus {
-    background-color: orange;
-    color: black;
+.post-main{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
-
-.fileicon{
-    display: hidden;
+.postinput{
+width: 50%;
+margin: auto;
+display: flex;
+height: 40px;
+}
+.upload-topic{
+ opacity: 30%;
+ color: cadetblue;
+}
+textarea{
+   margin: 10px;
+   border: none;
+   color: black;
+   font-weight: bold;
+}
+.file{
+    display: none;
     
     background-color:#eee;
     color: orange;
