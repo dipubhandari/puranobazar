@@ -1,21 +1,30 @@
 import React from 'react'
+import  useState  from "react";
 import Banner from './component/banner/Banner'
 import Footer from './component/Footer/Footer'
+import Header from './component/header/Header'
 import Product from './component/products/Products'
 import './Home.css'
 const Home = () => {
+  // state for search product get from header
+  const [searchProduct, setProduct] = React.useState('')
+  // function for search product get from header
+  const Find = (key) => {
+    setProduct(key)
+    
+  }
   return (
     <div className='homecontainer'>
 
 
-
+      <Header search={Find} />
       <div className="banner">
         <Banner />
       </div>
       {/* banner end */}
       <main>
         <p>
-          <Product />
+          <Product searchProduct={searchProduct} />
         </p>
       </main>
       <div className="footer">

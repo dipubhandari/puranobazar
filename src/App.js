@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // import logo from './logo.svg';
 import './App.css';
-import Header from './component/header/Header';
+// import Header from './component/header/Header';
 import Post from './component/Post/Post';
 import ProductDetails from './component/product-details/productdetails';
 import Home from './Home';
@@ -31,7 +31,7 @@ function App() {
   console.log(isloggedIn)
   return (
     <BrowserRouter> <div className="App">
-      <Header />
+      {/* <Header /> */}
       <Routes>
 
         <Route path="/" element={<Home />} />

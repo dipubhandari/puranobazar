@@ -5,6 +5,7 @@ import './post.css'
 import Footer from '../Footer/Footer'
 import district, { ward } from './data'
 import axios from 'axios'
+import Header from '../header/Header';
 
 const Post = () => {
     // const getting the form data
@@ -64,7 +65,7 @@ const Post = () => {
 
     return (
         <div>
-
+            <Header />
             {/* Post  */}
             <form action="" encType='multipart/form-data'>
                 {/* <input type="text" name='name' /> */}

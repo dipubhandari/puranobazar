@@ -70,6 +70,7 @@ const Productdetails = () => {
         <div className='product_detail_container'>
 
             {/* <Header /> */}
+            <Header />
 
             <section className="product_details_main">
 

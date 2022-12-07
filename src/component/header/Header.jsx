@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './Header.css';
 import SearchIcon from '@mui/icons-material/Search';
 import LoginIcon from '@mui/icons-material/Login';
@@ -24,7 +24,17 @@ const Header = (props) => {
     function show(value) {
         setLoginClick(value);
     }
-    //  login check
+
+
+    //  getting the search word from user
+    let search = useRef(null)
+    const searchClick = function () {
+        // calling the function from props from app parent comoponent
+        const data = search.current.value
+        props.search(data)
+        // search.current.value = data 
+    }
+    // getting the search word from user
 
     // checking if the useris logeed in or not
     // checking if the useris logeed in or not
@@ -65,8 +75,9 @@ const Header = (props) => {
 
                 <div className="searchfield">
 
-                    <input type="text" className='searchinput' placeholder='Find mobiles/bikes/laptops/...' />
-                    <section className="searchIcon">
+                    <input type="text" className='searchinput'
+                        ref={search} placeholder='Find mobiles/bikes/laptops/...' />
+                    <section className="searchIcon" onClick={searchClick}>
                         <button className='search'> <SearchIcon /> </button>
                     </section>
 
