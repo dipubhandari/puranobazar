@@ -5,37 +5,36 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
 import './loginsignupstyle.css'
 import CloseIcon from '@mui/icons-material/Close';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AccountModal = (props) => {
 
-    // signup
-    // signup
-
 
     const [msg, setMsg] = useState('')
+    // inputs when user type username email
     const [input, setInput] = useState({})
 
     // handlechange for signup
-
-
     function handleChange(signup_element) {
         const name = signup_element.target.name
         const value = signup_element.target.value
         console.log(input)
-
+        // setting the value in input that user press i
         setInput({ ...input, [name]: value })
     }
 
-
-    // handlesubmit for signup
+    // handlesubmit for signup 
 
     async function handleSubmit(e) {
 
         e.preventDefault()
-
+        console.log(input)
         await axios.post('/createaccount', input)
             .then((response) => {
                 setMsg(response.data)
+                notify(response.data)
+                setInput({})
             })
             .catch((err) => {
                 console.log(err)
@@ -72,10 +71,19 @@ const AccountModal = (props) => {
         await axios.post('/login', login)
             .then((response) => {
                 // setloginmsg(response.data)
-                console.log(response.data)
+
+                // setloginmsg(response.data.login_err)
+                notify(response.data.login_err)
 
                 const setLocalStorage = localStorage.setItem('user', JSON.stringify(response.data))
-                console.log(localStorage.getItem('user'))
+                if (!response.data.login_err) {
+                    notify('You Are Login!')
+                    setTimeout(() => {
+                        document.location.reload()
+
+                    }, 1000)
+
+                }
             })
             .catch((err) => {
                 console.log(err)
@@ -94,7 +102,16 @@ const AccountModal = (props) => {
     const [isCreateAccount, setisCreateAccounted] = useState(false)
 
     props.show(isLogin)
-
+    const notify = (e) => toast(e, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    })
 
 
     if (isLogin) {
@@ -104,13 +121,14 @@ const AccountModal = (props) => {
             <div className="close" onClick={() => {
                 setIslogin(false)
             }}>
+            
                 <CloseIcon />
             </div>
             {
                 (!(isCreateAccount)) ?
                     <div className="formarea">
                         <h4 className='login-circle'><PersonPinIcon /> <span>Login</span></h4>
-                        <span>{loginmsg}</span>
+                        <span className='msg'>{loginmsg}</span>
                         <form action="" className='form' onSubmit={loginSend}>
                             <input
                                 type="text"
@@ -142,7 +160,7 @@ const AccountModal = (props) => {
 
                     <div className="formarea">
                         <h4>Create New Account</h4>
-                        <span className='notification'>{msg}</span>
+                        <span className='note_err'>{msg}</span>
                         {/* <span className='msg' id='login-msg'>{msg}</span> */}
                         <form action="" className='form'>
                             <input
@@ -170,7 +188,7 @@ const AccountModal = (props) => {
                                 type="text"
                                 className="value"
                             />
-                            <input type='submit' className='' name='auth' value='Send' onClick={handleSubmit} />
+                            <input type='submit' className='createbtn' name='auth' value='Send' onClick={handleSubmit} />
                             <span className='create login-sign' onClick={() => { setisCreateAccounted(false) }}>Login</span>
                         </form>
                     </div>}

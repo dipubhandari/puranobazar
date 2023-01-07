@@ -10,10 +10,12 @@
 }
 
 .lo {
-    color: rgb(52, 33, 70);
-    background-color: none;
+   
+    background-color: #eee;
     position: relative;
     bottom: 0px;
     border: none;
+    padding: 14px;
+    color: orange;
     right: -100px;
 }

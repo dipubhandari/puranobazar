@@ -1,8 +1,11 @@
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload'; import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
-import React from 'react'
+import React, { useState } from 'react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import './post.css'
 import Footer from '../Footer/Footer'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import district, { ward } from './data'
 import axios from 'axios'
 import Header from '../header/Header';
@@ -12,6 +15,8 @@ const Post = () => {
 
     const [input, setInput] = React.useState({})
 
+
+    const [sellNotification, setSellNotification] = useState()
 
     //   getting email from localstrorage
     const email = JSON.parse(localStorage.getItem('user')).email
@@ -55,17 +60,33 @@ const Post = () => {
         formData.append('ward', input.ward)
         console.log(input)
         console.log(input)
-        const post = await axios.post('http://localhost:5000/selling', formData)
-            .then((response) => {
-                console.log(response.data)
-            }).catch((problem) => {
-                console.log(problem)
-            })
+        // checking the all inputs are entered or not 
+        if (!(input.file && input.district && input.name)) {
+            notify('Please check all the fields')
+        }
+        else {
+
+            const post = await axios.post('http://localhost:5000/selling', formData)
+                .then((response) => {
+                    console.log(response.data.result)
+                    notify(response.data.result)
+
+                    setInput('')
+                    // setInput()
+                }).catch((problem) => {
+                    console.log(problem)
+                })
+        }
     }
+
+
+    const notify = (event) => toast(event);
+
 
     return (
         <div>
             <Header />
+            <ToastContainer />
             {/* Post  */}
             <form action="" encType='multipart/form-data'>
                 {/* <input type="text" name='name' /> */}
@@ -75,6 +96,7 @@ const Post = () => {
                         <h1 className='heading'> <DriveFolderUploadIcon /> SELL PRODUCT AND EARN <CurrencyRupeeIcon /></h1>
 
                         <select name="categories" id=""
+
                             onChange={handleChange}>
                             <option value="mobile">Mobile</option>
                             <option value="garment">Clothes</option>
@@ -120,7 +142,8 @@ const Post = () => {
                             name='price' onChange={handleChange}
                         />
                         <label htmlFor="file"><CloudUploadIcon /> <b className='upload-topic'>upload file</b></label>
-                        <input type="file" id='file' name="file" multiple onChange={file1}
+                        <input type="file" id='file' name="file" multiple required
+                            onChange={file1}
                             className='file' />
 
                         <textarea name="description" onChange={handleChange} id="" placeholder='Enter about the product / full features / and so on'
@@ -142,11 +165,12 @@ const Post = () => {
                         //     className='fileicon' multiple id="" /> */}
                     </div>
                 </section>
-                <input type="button" onClick={sell}
+                <input type="submit" onClick={sell}
 
 
                     className='sell-btn' value='Sell This Product' />
             </form>
+            {sellNotification}
             <Footer />
         </div>
     )
