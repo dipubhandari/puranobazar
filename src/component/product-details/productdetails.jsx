@@ -14,17 +14,15 @@ const Productdetails = () => {
 
     const [currentproductdetails, setdetails] = useState({})
 
-
-
-    let [image, setimage1] = useState();
+    let [image, setimage] = useState(currentproductdetails.images);
     // const image0 = productdetails.image[0]
     // small images
-    const [currentproductImage, setcurrentimage] = React.useState([image, image])
+    const [currentproductImage, setcurrentimage] = React.useState([])
 
     const [index, setIndex] = useState(0)
-    const [curreShow] = useState()
+    // const [curreShow] = useState()
     const location = useLocation()
-
+    // products email who posted 
     const [email, setEMAILS] = useState('')
     //fetching the data based on url in the id
 
@@ -32,15 +30,18 @@ const Productdetails = () => {
         async function getData() {
             const path = location.pathname.split('/')
             const id = path[path.length - 1]
-
             await axios.get(`/get-product-details/${id}`)
                 .then((response) => {
-                    console.log(response.data)
-                    setdetails(response.data[0])
-                    setEMAILS(response.data[0].email)
-                    const f = response.data[0].images
-                    setimage1(f)
-                    console.log(f)
+                    setdetails(response.data.data)
+                    setEMAILS(response.data.data.email)
+                    const file = response.data.data
+                    // setimage(response.data.data.images[0].filename)
+                    const images = response.data.data.images.map((a, id) => {
+                        return a.filename
+                    })
+                   
+                    setcurrentimage(images)
+                    setimage(images)
                 }).catch((er) => { })
 
         }
@@ -61,7 +62,7 @@ const Productdetails = () => {
             })
         }
         getSellerInfo(email)
-
+        console.log(image)
     }, [email])
 
 
@@ -87,7 +88,7 @@ const Productdetails = () => {
                             className='arrow' />
 
                         <img
-                            src={`/uploads/${image}`}
+                            src={`/uploads/${image[index]}`}
 
                             alt="loadi"
                         />
@@ -110,7 +111,7 @@ const Productdetails = () => {
                         {
                             currentproductImage.map((ele, z) => {
                                 return <span className='imgdiv' id={(index == z) ? 'now' : null}>
-                                    <img src={`/uploads/${image}`} alt="" />
+                                    <img src={`/uploads/${image[z]}`} alt="" />
                                 </span>
                             })
                         }

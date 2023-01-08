@@ -35,31 +35,29 @@ const Post = () => {
     // handle image
     const file1 = function (e) {
         const name = e.target.name
-        const value = e.target.files[0]
+        const value = e.target.files
+        console.log(input)
         setInput({ ...input, [name]: value })
     }
     async function sell(e) {
         e.preventDefault()
         const formData = new FormData()
 
-        // formData.append('file', input.file)
-        // formData.append('file2', input.file2)
-        // formData.append('file3', input.file3)
         formData.append('name', input.name)
         formData.append('price', input.price)
+        // checking if there is data in input file or not so that no 
+        if (input.file) {
+            for (let i = 0; i < input.file.length; i++) {
+                formData.append("file", input.file[i]);
+            }
+        }
 
-        formData.append('file', input.file)
         formData.append('email', email)
         formData.append('description', input.description)
-        // formData.append('file5', input.file5)
-        // formData.append('file6', input.file6)
-        // formData.append('file7', input.file7)
-        // formData.append('file8', input.file8)
+
         formData.append('categories', input.categories)
         formData.append('district', input.district)
         formData.append('ward', input.ward)
-        console.log(input)
-        console.log(input)
         // checking the all inputs are entered or not 
         if (!(input.file && input.district && input.name)) {
             notify('Please check all the fields')
@@ -76,6 +74,7 @@ const Post = () => {
                 }).catch((problem) => {
                     console.log(problem)
                 })
+            // }
         }
     }
 
@@ -133,11 +132,11 @@ const Post = () => {
 
                     </div>
                     <div className='post-main'>
-                        <input type="text" placeholder='Enter the name'
+                        <input type="text" placeholder='Write product name'
                             value={input.name || ''} className='postinput'
                             name='name' onChange={handleChange} />
 
-                        <input type="number" placeholder='Enter Price'
+                        <input type="number" placeholder='Enter you want to sell Price'
                             value={input.price || ''} className='postinput'
                             name='price' onChange={handleChange}
                         />

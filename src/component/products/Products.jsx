@@ -9,13 +9,14 @@ const Product = (props) => {
 
     // finding the add data from database
     const [ProductDetails, setProductDetails] = useState([{}])
+
+
     useEffect(() => {
         async function fetch() {
             await axios.get('/products')
                 .then((response) => {
                     console.log(response)
-                    //    var base64Flag = 'data:image/jpeg;base64,';
-                    //    var imageStr = setProductDetails(response.imag.data.data)
+
                     setProductDetails(response.data)
                 })
 
@@ -46,7 +47,9 @@ const Product = (props) => {
                     <div className='data '>
 
                         <span className="datapic">
-                            <img src={`/uploads/${product.images}`} alt="" className="image" />
+
+                            <img src={`/uploads/${product.images}}`} alt="loa" className="image" />
+
                         </span>
                         <div className='footer-data'>
                             <span className='price'>Rs.{product.price}</span>
