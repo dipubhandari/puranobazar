@@ -14,7 +14,7 @@ const Productdetails = () => {
 
     const [currentproductdetails, setdetails] = useState({})
 
-    let [image, setimage] = useState(currentproductdetails.images);
+    let [image, setimage] = useState([]);
     // const image0 = productdetails.image[0]
     // small images
     const [currentproductImage, setcurrentimage] = React.useState([])
@@ -39,7 +39,7 @@ const Productdetails = () => {
                     const images = response.data.data.images.map((a, id) => {
                         return a.filename
                     })
-                   
+
                     setcurrentimage(images)
                     setimage(images)
                 }).catch((er) => { })

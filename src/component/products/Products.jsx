@@ -8,7 +8,7 @@ import { useStepperContext } from '@mui/material';
 const Product = (props) => {
 
     // finding the add data from database
-    const [ProductDetails, setProductDetails] = useState([{}])
+    const [ProductDetails, setProductDetails] = useState([{images:[{filename:''}]}])
 
 
     useEffect(() => {
@@ -16,7 +16,6 @@ const Product = (props) => {
             await axios.get('/products')
                 .then((response) => {
                     console.log(response)
-
                     setProductDetails(response.data)
                 })
 
@@ -48,7 +47,7 @@ const Product = (props) => {
 
                         <span className="datapic">
 
-                            <img src={`/uploads/${product.images}}`} alt="loa" className="image" />
+                            <img src={`/uploads/${product.images[0].filename}`} alt="loa" className="image" />
 
                         </span>
                         <div className='footer-data'>
