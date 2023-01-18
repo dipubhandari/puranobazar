@@ -62,8 +62,7 @@ const Productdetails = () => {
             })
         }
         getSellerInfo(email)
-        console.log(image)
-    }, [email])
+       }, [email])
 
 
 
@@ -110,7 +109,7 @@ const Productdetails = () => {
                         {/* <span className='imgdiv'> */}
                         {
                             currentproductImage.map((ele, z) => {
-                                return <span className='imgdiv' id={(index == z) ? 'now' : null}>
+                                return <span className='imgdiv' id={(index == z) ? 'now' : null} key={z}>
                                     <img src={`/uploads/${image[z]}`} alt="" />
                                 </span>
                             })

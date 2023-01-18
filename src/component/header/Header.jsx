@@ -45,7 +45,6 @@ const Header = (props) => {
         const checkLogged = async () => {
             //  getting user details from localstorage
             const user = JSON.parse(localStorage.getItem('user'))
-            console.log(user)
             // checking the user details to the database
             await axios.post('/checkuser', user)
                 .then((response) => {

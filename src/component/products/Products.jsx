@@ -5,17 +5,18 @@ import './Product.css'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useStepperContext } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 const Product = (props) => {
 
     // finding the add data from database
-    const [ProductDetails, setProductDetails] = useState([{images:[{filename:''}]}])
+    const [ProductDetails, setProductDetails] = useState([{ images: [{ filename: '' }] }])
 
 
     useEffect(() => {
         async function fetch() {
             await axios.get('/products')
                 .then((response) => {
-                    console.log(response)
                     setProductDetails(response.data)
                 })
 
@@ -29,8 +30,9 @@ const Product = (props) => {
         async function find() {
             const find = await axios.get(`/search/${search}`)
                 .then((response) => {
-                    console.log(response.data)
                     setProductDetails(response.data)
+                }).catch(err => {
+
                 })
         }
         find()
@@ -41,9 +43,11 @@ const Product = (props) => {
         <div className='container'>
             {/*  */}
             {ProductDetails.map((product, index) => {
-                return <Link to={`/product-detail/${product._id}`} className='link'>
+                return <Link to={`/product-detail/${product._id}`} className='link' key={index}>
 
                     <div className='data '>
+                        <span className='fav' type='button'><FavoriteIcon /></span>
+                        <span className='liked' type='button'><FavoriteIcon /></span>
 
                         <span className="datapic">
 
@@ -53,7 +57,7 @@ const Product = (props) => {
                         <div className='footer-data'>
                             <span className='price'>Rs.{product.price}</span>
 
-                            <span className='data-name'>{product.name}</span>
+                            <span className='data-name'>{product.name}...</span>
                             <section className="productfooter">
                                 <p className='location'>{product.district}</p>
                                 <p className='date'>{product.date}</p>
