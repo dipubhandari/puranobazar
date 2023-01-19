@@ -7,7 +7,7 @@ import Product from './component/products/Products'
 import './Home.css'
 
 
-const Home = () => {
+const Home = (props) => {
   // state for search product get from header
   const [searchProduct, setProduct] = React.useState('')
   // function for search product get from header
@@ -26,7 +26,7 @@ const Home = () => {
       {/* banner end */}
       <main>
         <p>
-          <Product searchProduct={searchProduct} />
+          <Product searchProduct={searchProduct} isloggedIn={props.isloggedIn} />
         </p>
       </main>
       <div className="footer">

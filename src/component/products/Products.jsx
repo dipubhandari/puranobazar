@@ -18,6 +18,7 @@ const Product = (props) => {
             await axios.get('/products')
                 .then((response) => {
                     setProductDetails(response.data)
+                    console.log(response.data)
                 })
 
         }

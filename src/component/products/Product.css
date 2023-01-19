@@ -1,11 +1,39 @@
 .container {
     justify-content: center;
     display: grid;
-    grid-template-columns: 300px 300px 300px 300px;
+    grid-template-columns: 250px 250px 250px 250px;
     grid-auto-rows: auto;
     gap: 20px;
 }
 
+
+
+
+.link {
+    min-height: 350px;
+    border: 1px solid rgb(197, 219, 219);
+}
+
+
+
+.fav {
+    position: relative;
+    width: 10px;
+    height: 0px;
+    right: -270px;
+    color: rgb(221, 221, 221);
+    visibility: hidden;
+    /* margin: 0px 10px; */
+    /* padding: 10px; */
+}
+
+.liked {
+
+    position: absolute;
+  right: 0px;
+  top: 0px;
+    color: rgb(255, 242, 0);
+}
 
 
 .data {
@@ -15,57 +43,16 @@
     padding: 1px 1px;
     flex: 1;
     height: auto;
-    /* overflow: hidden; */
+    position: relative;
     flex-direction: column;
     background-color: #ffff;
 }
 
-.link {
-    min-height: 350px;
-    border: 1px solid rgb(197, 219, 219);
-}
-
-.productfooter {
-    display: flex;
-    color: lightslategrey;
-    gap: 50px;
-    margin: 0px;
-    height: 10px;
-}
-
-.date {
-    margin-right: 10px;
+.datapic {
     width: 100%;
-    justify-content: flex-start;
-    display: flex;
-    flex: 1;
-    left: 0;
-
-    position: static;
+    background-color: #ffff;
 }
 
-.fav {
-    position: relative;
-    width: 10px;
-    height: 0px;
-    right: -270px;
-    color: rgb(221, 221, 221);
-    /* margin: 0px 10px; */
-    /* padding: 10px; */
-}
-
-.liked {
-
-    position: relative;
-    width: 10px;
-    height: 0px;
-    right: -270px;
-    color: orangered;
-    /* margin: 0px 10px; */
-    /* padding: 10px; */
-}
-
-/* } */
 .data-name {
     justify-content: flex-start;
     display: flex;
@@ -85,14 +72,27 @@
     font-weight: bold;
 }
 
-.datapic {
-    width: 100%;
-    background-color: #ffff;
+.productfooter {
+    display: flex;
+    color: lightslategrey;
+    gap: 50px;
+    height: 10px;
 }
+
+.date {
+    margin-right: 10px;
+    width: 100%;
+    justify-content: flex-start;
+    display: flex;
+    flex: 1;
+    left: 0;
+    position: static;
+}
+
 
 .image {
 
-    width: 70%;
+    width: 100%;
     /* margin-top: 10px; */
     height: 200px;
     flex: 4;
